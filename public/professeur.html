@@ -1,0 +1,652 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script
+src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
+type="module"
+></script>
+<link rel="icon" href="https://raw.githubusercontent.com/DARCK-CREATOR8/HOME-WORK/3ab55eb700f5a9381ffe6fc6a780fa11dfe72ac3/Screenshot_20260215-195450.png">
+<link rel="stylesheet" href="css/professeur.css" />
+<link
+rel="stylesheet"
+href="bootstrap-icons-1.13.1/font/bootstrap-icons.min.css"
+/>
+<link rel="stylesheet" href="style/flowbite.min.css" />
+<title>PROFESSEURS PORTAIL</title>
+</head>
+<body class="body overflow-x-hidden">
+<div id="successModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto ">
+     
+        <div class="relative p-4 text-center border border-gray-100 dark:border-gray-700  bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <button type="button" class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white " onclick="closeModal()">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="w-20 h-20 rounded-full bg-green-100 dark:bg-green-900 p-2 flex items-center justify-center mx-auto mb-3.5">
+                <i class="bi bi-exclamation-triangle-fill text-4xl text-gray-600 dark:text-gray-200"></i>
+                <span class="sr-only">Success</span>
+            </div>
+            <p class="mb-4 mt-5 text-lg font-semibold text-gray-900 dark:text-white result"></p>
+        </div>
+    </div>
+</div>
+  <div id="loader" class="fixed inset-0 flex items-center justify-center bg-blue-500 z-50">
+  <div class="animate-spin spin">
+  </div>
+</div>
+<header class="antialiased">
+    <nav class="bg-white dark:border-gray-700 px-4 lg:px-6 py-5 border-b dark:bg-gray-800">
+      <div class="flex flex-wrap justify-between items-center">
+        <div class="flex justify-start items-center">
+          <button id="toggleSidebar" aria-expanded="true" aria-controls="sidebar" class="hidden p-2 mr-3 text-gray-600 rounded cursor-pointer lg:inline hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
+            <i class="bi bi-list w-5 h-5 text-2xl"></i>
+          </button>
+
+          <a href="#" class="flex mr-4">
+            <i class="bi bi-mortarboard-fill text-3xl text-primary-600 dark:text-white"></i>
+            <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white ml-2">H-WORK</span>
+          </a>
+
+        </div>
+        <div class="flex items-center lg:order-2">
+
+
+           <button type="button" onclick="theme()"class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 theme">
+            <span class="sr-only">Theme</span>
+            <i class="bi bi-brightness-high w-5 h-5 text-xl"></i>
+          </button>
+
+
+          <button type="button" class="flex mx-3 text-lg bg-gray-600 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+            <span class="sr-only">Menu utilisateur</span>
+            <div class="w-9 h-9 rounded-full bg-primary-600 flex items-center justify-center text-white font-extrabold profil-letter">
+              H
+            </div>
+          </button>
+
+
+          <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
+            <div class="py-5 px-4 px-8">
+              <span class="block text-2xl font-extrabold text-gray-900 dark:text-white profil-name">Chargement...</span>
+              <span class="block text-sm text-gray-500 truncate dark:text-gray-400 profil-role py-2">
+                Chargement...
+              </span>
+              <span class="block text-sm text-gray-500 truncate dark:text-gray-400 profil-number py-2">Chargement...
+              </span>
+              <span class="block text-sm text-gray-400 mt-1 profil-email py-2">
+                Chargement...
+                </span>
+              <span class="block text-sm text-gray-400 mt-1 profil-id py-2">
+                Chargement...
+                </span>
+            </div>
+            <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+              <li>
+                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
+                  <i class="bi bi-person mr-2"></i>Mon profil
+                </a>
+              </li>
+          
+            </ul>
+
+            <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+              <li>
+                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <i class="bi bi-box-arrow-right mr-2"></i>
+                  Déconnexion
+                </a>
+              </li>
+            </ul>
+          </div>
+      
+       <button type="button"   data-drawer-target="default-sidebar"
+                    data-drawer-toggle="default-sidebar"
+                    aria-controls="default-sidebar" class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 theme">
+            <span class="sr-only">Theme</span>
+            <i class="bi bi-list w-5 h-5 text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+</header>
+<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidenav">
+  <div class="overflow-y-auto py-5 px-3 h-full">
+    
+   
+    <div class="flex items-center mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+      <i class="bi bi-mortarboard-fill text-3xl text-blue-600 dark:text-blue-400 mr-3"></i>
+      <span class="text-xl font-semibold text-gray-800 dark:text-white">HOME WORK</span>
+    </div>
+    
+
+    <ul class="space-y-2">
+      
+
+      <li>
+        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-house-door w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mr-3"></i>
+          <span>Tableau de bord</span>
+        </a>
+      </li>
+      
+
+      <li>
+        <button type="button" class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-pages" data-collapse-toggle="dropdown-pages">
+          <i class="bi bi-journal-text w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mr-3"></i>
+          <span class="flex-1 text-left whitespace-nowrap">Devoirs</span>
+          <i class="bi bi-chevron-down w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+        </button>
+        <ul id="dropdown-pages" class="hidden py-2 space-y-2">
+          <li onclick="addWork()">
+            <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <i class="bi bi-plus-circle mr-2 text-gray-500 dark:text-gray-400"></i>
+              Nouveau devoir
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <i class="bi bi-clock mr-2 text-gray-500 dark:text-gray-400"></i>
+              Devoirs actifs
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <i class="bi bi-pen mr-2 text-gray-500 dark:text-gray-400"></i>
+              Devoirs rendus
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+
+      <li>
+        <button type="button" class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-classes" data-collapse-toggle="dropdown-classes">
+          <i class="bi bi-people w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mr-3"></i>
+          <span class="flex-1 text-left whitespace-nowrap">Classes</span>
+          <i class="bi bi-chevron-down w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+        </button>
+        <ul id="dropdown-classes" class="hidden py-2 space-y-2">
+          <li onclick="showListStudent()">
+            <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <i class="bi bi-person-gear mr-2 text-gray-500 dark:text-gray-400"></i>
+              Gérer les élèves
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+
+      <li>
+        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-chat-left-text w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mr-3"></i>
+          <span class="flex-1 whitespace-nowrap">Messages</span>
+          <span class="inline-flex justify-center items-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full">6</span>
+        </a>
+      </li>
+      
+
+      <li>
+        <button type="button" class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-resources" data-collapse-toggle="dropdown-resources">
+          <i class="bi bi-book w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mr-3"></i>
+          <span class="flex-1 text-left whitespace-nowrap">Ressources</span>
+          <i class="bi bi-chevron-down w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+        </button>
+        <ul id="dropdown-resources" class="hidden py-2 space-y-2">
+          <li>
+            <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <i class="bi bi-calculator mr-2 text-gray-500 dark:text-gray-400"></i>
+              Livres de maths
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <i class="bi bi-file-text mr-2 text-gray-500 dark:text-gray-400"></i>
+              Banque d'exercices
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <i class="bi bi-file-earmark mr-2 text-gray-500 dark:text-gray-400"></i>
+              Modèles de devoirs
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+
+      <li class="pt-5 mt-5 border-t border-gray-200 dark:border-gray-700"></li>
+      
+
+      <li>
+        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-bar-chart w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mr-3"></i>
+          <span>Statistiques</span>
+        </a>
+      </li>
+      
+
+      <li>
+        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-check-square w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mr-3"></i>
+          <span>Corrections</span>
+        </a>
+      </li>
+      
+
+      <li>
+        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-question-circle w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mr-3"></i>
+          <span>Aide</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+  <div class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <a href="#" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600">
+      <i class="bi bi-tools w-5 h-5"></i>
+    </a>
+    <a href="#" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600">
+      <i class="bi bi-gear w-5 h-5"></i>
+    </a>
+    <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600">
+      <i class="bi bi-translate w-5 h-5"></i>
+    </button>
+  </div>
+</aside>
+<div class="home-page">
+<section class="bg-gray-50 dark:bg-gray-900  flex items-center">
+  <div class="px-2 mx-auto lg:px-3 w-full">
+    <div class="relative bg-white  dark:bg-gray-900 sm:rounded-lg">
+      <div class="flex flex-col items-center justify-between py-4 px-2 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+        <div class="w-full md:w-1/2">
+          <form class="flex items-center">
+            <label for="simple-search" class="sr-only">Search</label>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-white animate-pulse  "fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input type="text" id="simple-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+            </div>
+          </form>
+        </div>
+        <div class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+          <button onclick="addWork()" type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium dark:text-white rounded-lg  focus:ring-4 focus:ring-primary-300 dark:bg-gray-800  dark:hover:bg-primary-700 border dark:border-gray-700 focus:outline-none dark:focus:ring-primary-800 anime comnt">
+            <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+            </svg>
+            Add Home-work
+          </button>
+          <div class="flex items-center w-full space-x-3 md:w-auto">
+            <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown" class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 anime bt" type="button">
+              <svg class="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+              </svg>
+              Actions
+            </button>
+            <div id="actionsDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="actionsDropdownButton">
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mass Edit</a>
+                </li>
+              </ul>
+              <div class="py-1">
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete all</a>
+              </div>
+            </div>
+            <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 anime btx" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-4 h-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
+              </svg>
+              Filter
+              <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+              </svg>
+            </button>
+            
+            <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+              <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                Category
+              </h6>
+              <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                <li class="flex items-center">
+                  <input id="apple" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                  <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                  Recent
+                  </label>
+                </li>
+                <li class="flex items-center">
+                  <input id="fitbit" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                  <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                    Hier
+                  </label>
+                </li>
+                <li class="flex items-center">
+                  <input id="dell" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                  <label for="dell" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                    Rendu
+                  </label>
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="work bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+  <h2 class="text-4xl font-extrabold leading-tight tracking-tight text-center text-gray-900 dark:text-white title mb-4 anime">
+    Activité
+  </h2>
+  
+  <div class="my-4 text-center">
+    <a href="#" title="" class="inline-flex items-center text-lg font-medium text-blue-600 dark:text-blue-400 hover:underline learn anime">
+      En savoir plus sur notre programme
+      <svg aria-hidden="true" class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </div>
+  
+  <div>
+    <ol class="relative  mt-2 ol grid md:grid-cols-3 gap-6 border-l-2 border-l-gray-300 dark:border-l-gray-700" id="works-container">
+    </ol>
+  </div>
+</div>
+<div class="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+  <h2 class="text-4xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white text-center mb-2">
+    Statistiques
+  </h2>
+  
+  <p class="text-gray-600 dark:text-gray-400 mb-4 text-center anime comnt">
+    Sur cette page, vous pouvez consulter les statistiques
+    détaillées de vos classes, suivre la progression des élèves,
+    analyser les taux de réussite et identifier les domaines
+    nécessitant une attention particulière.
+  </p>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center space-x-4 anime">
+      <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+        <i class="bi bi-people-fill text-blue-600 dark:text-blue-300 text-xl"></i>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Élèves</p>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white student">0</p>
+      </div>
+    </div>
+
+
+    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center space-x-4 anime">
+      <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+        <i class="bi bi-border-style text-green-600 dark:text-green-300 text-xl"></i>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Classes</p>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white classe">0</p>
+      </div>
+    </div>
+
+
+    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center space-x-4 anime">
+      <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+        <i class="bi bi-journal-text text-purple-600 dark:text-purple-300 text-xl"></i>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Devoirs</p>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white devoir">0</p>
+      </div>
+    </div>
+
+
+    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center space-x-4 anime">
+      <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center">
+        <i class="bi bi-journals text-yellow-600 dark:text-yellow-300 text-xl"></i>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Exercices</p>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white exercice">0</p>
+      </div>
+    </div>
+
+
+    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center space-x-4 anime">
+      <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center">
+        <i class="bi bi-book text-red-600 dark:text-red-300 text-xl"></i>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Leçons</p>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white lecon">0</p>
+      </div>
+    </div>
+
+
+    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center space-x-4 anime">
+      <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center">
+        <i class="bi bi-bookmark text-indigo-600 dark:text-indigo-300 text-xl"></i>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Évaluations</p>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white eval">0</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="add-work flex items-center">
+  <div class="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full ">
+    <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+      <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+        NOUVEAU DEVOIR
+      </h2>
+      <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" onclick="closeWork()">
+        <i class="bi bi-x text-2xl"></i>
+      </button>
+    </div>
+    
+    <form class="form p-6">
+      <div class="grid gap-4 sm:grid-cols-2">
+
+        <div class="sm:col-span-2">
+          <label for="title" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            TITRE DU DEVOIR
+          </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            class="w-full p-2.5 text-sm text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 inp "
+            placeholder="Ex: Exercices d'algèbre"
+            required
+          />
+        </div>
+
+
+        <div>
+          <label for="note" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            Note /20
+          </label>
+          <input
+            type="number"
+            name="note"
+            id="note"
+            class="w-full p-2.5 text-sm text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 inp"
+            placeholder="Ex: 20"
+            required
+          />
+        </div>
+
+
+        <div>
+          <label for="classe" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            Classe
+          </label>
+          <select
+            id="classe"
+            name="classe"
+            class="w-full p-2.5 text-sm text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 inp"
+            required
+          >
+            <option value="">Sélectionner une classe</option>
+            <option value="1H">1ère Humanités</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="type" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            Type
+          </label>
+          <select
+            id="type"
+            name="type"
+            class="w-full p-2.5 text-sm text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 inp"
+            required
+          >
+            <option value="">Sélectionner le type</option>
+            <option value="devoir">DEVOIRS</option>
+            <option value="lecon">LEÇONS</option>
+            <option value="exercice">EXERCICES</option>
+          </select>
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="deadline" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            Date limite
+          </label>
+          <input
+            type="datetime-local"
+            value="2026-02-15T10:00"
+            name="deadline"
+            id="deadline"
+            class="w-full p-2.5 text-sm text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 inp"
+            required
+          />
+        </div>
+
+
+        <div class="sm:col-span-2">
+          <label for="description" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            Description
+          </label>
+          <textarea
+            id="description"
+            rows="6"
+            name="description"
+            class="w-full p-2.5 text-sm text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 inp"
+            placeholder="Décrivez le devoir ici..."
+            required
+          ></textarea>
+        </div>
+      </div>
+
+
+      <div class="mt-6">
+        <button
+          type="submit"
+          class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm transition-colors focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 btn-work"
+        >
+          <i class="bi bi-plus-circle mr-2"></i>
+          Ajouter le devoir
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="list-student md:p-5">
+<section class="p-2 sm:p-5 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+      GÉRER LES ÉLÈVES
+    </h2>
+    <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" onclick="closeListStudent()">
+      <i class="bi bi-x text-2xl"></i>
+    </button>
+  </div>
+
+
+  <div class="mx-auto max-w-screen-xl lg:px-5">
+    <div class="relative bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden border border-gray-200 dark:border-gray-700">
+      
+
+      <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+        
+
+        <div class="w-full md:w-1/2">
+          <form class="flex items-center">
+            <label for="simple-search" class="sr-only">Rechercher</label>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <i class="bi bi-search w-5 h-5 text-gray-500 dark:text-gray-400"></i>
+              </div>
+              <input
+                type="text"
+                id="simple-search"
+                class="w-full pl-10 p-2.5 text-sm text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Rechercher un élève..."
+                required
+              />
+            </div>
+          </form>
+        </div>
+
+     
+      
+      </div>
+
+     
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+            <tr>
+              <th scope="col" class="px-4 py-3">
+                <i class="bi bi-person-circle mr-1"></i>
+                Nom
+              </th>
+              <th scope="col" class="px-4 py-3">
+                Email
+              </th>
+              <th scope="col" class="px-4 py-3">
+                Note
+              </th>
+              <th scope="col" class="px-4 py-3">
+                <span>ID</span>
+              </th>
+              <th scope="col" class="px-4 py-3">
+                Date de création
+              </th>
+            </tr>
+          </thead>
+          <tbody class="tbody">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<script
+src="style/flowbite.min.js"
+type="text/javascript"
+charset="utf-8"
+></script>
+<script
+src="js/professeur.js"
+type="text/javascript"
+charset="utf-8"
+></script>
+</body>
+</html>
