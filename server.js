@@ -474,7 +474,9 @@ app.get("/export-work/:id", async (req, res) => {
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
-
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
 
 app.listen(PORT,() => {
