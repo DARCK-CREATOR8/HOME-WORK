@@ -25,7 +25,12 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+  store: MongoStore.create({ 
+    mongoUrl: process.env.MONGO_URI,
+    ttl: 24 * 60 * 60, 
+    autoRemove: 'interval',
+    autoRemoveInterval: 10
+  }),
   cookie: {
     secure: false,
     sameSite: "lax",
