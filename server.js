@@ -23,6 +23,7 @@ app.use(session({
     secure: false,
     sameSite: "lax",
     httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000
   }
 }));
 const PORT = process.env.PORT
