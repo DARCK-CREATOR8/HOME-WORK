@@ -11,11 +11,11 @@ const PORT = 3000
 const SALT_ROUNDS = 10;
 webpush.setVapidDetails(
     "mailto:danielluzumu12@gmail.com",
-    "BIo_hsQ3pb93rTa8kjU1DjCjJZ1tMlGZ3YflnxJJLps0PrTpqwa5yqISByjZ-RiY7Tm14oiMDQDwuk7uQjhMR2s",
-    "eExjt7ZaphPRWzO4NqjIsgCmPC1lY97ipmKx_pOOIZ4"
+    process.env.VAPID_PUBLIC_KEY,
+    process.env.VAPID_PRIVATE_KEY
 )
 app.use(session({
-  secret: "monsecret",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -24,7 +24,7 @@ app.use(session({
     httpOnly: true,
   }
 }));
-const urlDb = "mongodb+srv://DARCK-CREATOR:dbDarckCreator@home-work.umdhohl.mongodb.net/schoolDB"
+const urlDb = process.env.MONGO_URI;
 mongoose.connect(urlDb)
 .then(() => {
   console.log("MongoDB connecté ✅");
