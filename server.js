@@ -21,7 +21,11 @@ app.use(cors({
   origin: process.env.BASE_API_URL,
   credentials: true
 }));
-app.use(session({
+const urlDb = process.env.MONGO_URI;
+mongoose.connect(urlDb)
+.then(() => {
+  console.log("MongoDB connecté ✅");
+  app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
@@ -37,10 +41,6 @@ app.use(session({
     httpOnly: true,
   }
 }));
-const urlDb = process.env.MONGO_URI;
-mongoose.connect(urlDb)
-.then(() => {
-  console.log("MongoDB connecté ✅");
 })
 .catch(err => console.log("Erreur connexion à MongoDb:", err));
 
