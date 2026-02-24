@@ -1,6 +1,6 @@
 const express = require("express")
 const session = require("express-session")
-const MongoStore = require("connect-mongo")
+const { MongoStore } = require("connect-mongo")
 const cors = require("cors")
 const mongoose = require("mongoose"); 
 const { Parser } = require("json2csv")
@@ -29,6 +29,12 @@ mongoose.connect(urlDb)
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+   store: MongoStore.create({ 
+    mongoUrl: urlDb,
+    ttl: 24 * 60 * 60, 
+    autoRemove: 'interval',
+    autoRemoveInterval: 10
+  }),
   cookie: {
     secure: false,
     sameSite: "lax",
