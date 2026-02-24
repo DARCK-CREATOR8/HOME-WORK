@@ -7,25 +7,9 @@ const { Parser } = require("json2csv")
 const webpush = require("web-push")
 const bcrypt = require("bcryptjs");
 const PDFDocument = require("pdfkit");
-
-const app = express()
-const PORT = process.env.PORT
-const SALT_ROUNDS = 10;
-webpush.setVapidDetails(
-    "mailto:danielluzumu12@gmail.com",
-    process.env.VAPID_PUBLIC_KEY,
-    process.env.VAPID_PRIVATE_KEY
-)
-
-app.use(cors({
-  origin: process.env.BASE_API_URL,
-  credentials: true
-}));
 const urlDb = process.env.MONGO_URI;
-mongoose.connect(urlDb)
-.then(() => {
-  console.log("MongoDB connecté ✅");
-  app.use(session({
+const app = express()
+app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
@@ -41,6 +25,21 @@ mongoose.connect(urlDb)
     httpOnly: true,
   }
 }));
+const PORT = process.env.PORT
+const SALT_ROUNDS = 10;
+webpush.setVapidDetails(
+    "mailto:danielluzumu12@gmail.com",
+    process.env.VAPID_PUBLIC_KEY,
+    process.env.VAPID_PRIVATE_KEY
+)
+
+app.use(cors({
+  origin: process.env.BASE_API_URL,
+  credentials: true
+}));
+mongoose.connect(urlDb)
+.then(() => {
+  console.log("MongoDB connecté ✅");
 })
 .catch(err => console.log("Erreur connexion à MongoDb:", err));
 
