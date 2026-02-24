@@ -1,5 +1,7 @@
 const express = require("express")
 const session = require("express-session")
+const MongoStore = require("connect-mongo")
+const cors = require("cors")
 const mongoose = require("mongoose"); 
 const { Parser } = require("json2csv")
 const webpush = require("web-push")
@@ -7,17 +9,23 @@ const bcrypt = require("bcryptjs");
 const PDFDocument = require("pdfkit");
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT
 const SALT_ROUNDS = 10;
 webpush.setVapidDetails(
     "mailto:danielluzumu12@gmail.com",
     process.env.VAPID_PUBLIC_KEY,
     process.env.VAPID_PRIVATE_KEY
 )
+
+app.use(cors({
+  origin: process.env.BASE_API_URL,
+  credentials: true
+}));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: {
     secure: false,
     sameSite: "lax",

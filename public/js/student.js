@@ -6,7 +6,7 @@ const modalEl = document.getElementById("successModal")
 const modal = new Modal(modalEl)
 async function loadProfile(){
   try {
-    const response = await fetch("/me",{
+    const response = await fetch("https://home-work-test.onrender.com/me",{
       credentials: "include"
     });
     if (!response.ok) return;
@@ -26,7 +26,7 @@ async function loadProfile(){
 async function loadWork() {
     const container = document.getElementById("works-container");
   try {
-    const response = await fetch("/works", {
+    const response = await fetch("https://home-work-test.onrender.com/works", {
       credentials: "include"
     })
 
@@ -147,7 +147,7 @@ async function loadWork() {
 }
 
 function downloadPdf(workID, workTitle) {
-  fetch(`/export-work/${workID}`)
+  fetch(`https://home-work-test.onrender.com/export-work/${workID}`)
     .then(res => {
       if (!res.ok) throw new Error("Impossible de télécharger");
       return res.blob();
@@ -171,7 +171,7 @@ function downloadPdf(workID, workTitle) {
 
 async function loadNotifications() {
   try {
-     const response = await fetch("/notifications",{
+     const response = await fetch("https://home-work-test.onrender.com/notifications",{
     credentials: "include"
   })
   if (!response.ok) {
@@ -267,7 +267,7 @@ async function subscribeUser() {
     applicationServerKey: urlBase64ToUint8Array("BIo_hsQ3pb93rTa8kjU1DjCjJZ1tMlGZ3YflnxJJLps0PrTpqwa5yqISByjZ-RiY7Tm14oiMDQDwuk7uQjhMR2s")
   });
 
-  await fetch("/subscribe", {
+  await fetch("https://home-work-test.onrender.com/subscribe", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

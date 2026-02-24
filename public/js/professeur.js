@@ -61,7 +61,7 @@ function theme() {
 }
 async function loadStudent() {
   try{
-    const response = await fetch("http://localhost:3000/students")
+    const response = await fetch("https://home-work-test.onrender.com/students")
     const eleves = await response.json()
     const tbody = document.querySelector(".tbody")
     tbody.innerHTML=""
@@ -96,7 +96,7 @@ async function loadStudent() {
 }
 async function loadProfile(){
   try {
-    const response = await fetch("/me",{
+    const response = await fetch("https://home-work-test.onrender.com/me",{
       credentials: "include"
     });
     if (!response.ok) return;
@@ -149,7 +149,7 @@ form.addEventListener("submit", async (e) => {
   })
 console.log("Données envoyées:", data);
   try {
-    const response = await fetch("http://localhost:3000/works", {
+    const response = await fetch("https://home-work-test.onrender.com/works", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -210,7 +210,7 @@ async function subscribeUser() {
     applicationServerKey: urlBase64ToUint8Array("BIo_hsQ3pb93rTa8kjU1DjCjJZ1tMlGZ3YflnxJJLps0PrTpqwa5yqISByjZ-RiY7Tm14oiMDQDwuk7uQjhMR2s")
   });
 
-  await fetch("/subscribe", {
+  await fetch("https://home-work-test.onrender.com/subscribe", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -238,7 +238,7 @@ function animeObser() {
 async function loadWork() {
   const container = document.getElementById("works-container")
   try {
-    const response = await fetch('/works',{
+    const response = await fetch('https://home-work-test.onrender.com/works',{
       credentials: "include"
     })
     if (!response.ok){
