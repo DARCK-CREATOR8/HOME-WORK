@@ -275,12 +275,12 @@ body{
   border-radius: 10px 10px;
   padding: 15px;
   background: #161616;
-  transition: all 0.6s ease !important;
+  transition: 0.6s;
   border: 0.5px solid #444;
 }
 .card:hover{
   background: #2b2b2b;
-  transform: rotate(-5deg) scale(0.8) !important;
+transform: rotate(-5deg) scale(0.8);
   border-left: 5px solid ghostwhite;
 }
 .card-title{
@@ -310,48 +310,4 @@ body{
 }
 .hello span {
   color: #666;
-}
-.anime {
-  transform: translateY(100px);
-  opacity: 0;
-  transition: transform 0.8s ease;
-}
-.txt {
-  font-size: 15px;
-  text-align: center;
-}
-.anime.transition-shadow{
-  transition: transform 0.8s ease;
-  transform: scale(0) rotateX(180deg);
-  opacity: 0;
-}
-.anime.sh{
-  transition: transform 0.8s ease;
-  transform: scale(0) rotateX(180deg);
-  opacity: 0;
-}
-
-.anime.late.sh{
-  transform: scale(1.0) rotateX(0deg);
-  opacity: 1;
-}
-.anime.late.transition-shadow{
-  transform: scale(1.0) rotateX(0deg);
-  opacity: 1;
-}
-.anime.late{
-  transform: translateY(0px);
-  opacity: 1;
-}
-.cont{
-  background-size: cover;
-  background-position: center;
-  background-image: url('https://raw.githubusercontent.com/DARCK-CREATOR8/HOME-WORK/3ab55eb700f5a9381ffe6fc6a780fa11dfe72ac3/Screenshot_20260215-195450.png');
-}
-.btnn {
-  background: transparent !important;
-  font-weight: bold;
-  border: 1px solid #ffe !important;
-  backdrop-filter: blur(4px);
-  border-radius: 25px 25px !important;
 }

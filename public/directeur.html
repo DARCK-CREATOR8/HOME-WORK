@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width-device=width,initial-scale=1.0">
+  <meta charset="UTF-8">
+  <link href="https://unpkg.com/tailwindcss@^3.0.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="bootstrap-icons-1.13.1/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style/flowbite.min.css">
+  <link rel="stylesheet" href="css/directeur.css">
+  <title> DIRECTEUR DASHBOARD</title>
+</head>
+<body class="body">
+  <div id="loader" class="fixed hidden inset-0 flex items-center justify-center bg-blue-500 z-50 ">
+    <div class="animate-spin spin"></div>
+  </div>
+  <header class="antialiased">
+    <nav class="bg-white border-gray-200 dark:border-gray-600 border-b px-4 lg:px-12 py-3 dark:bg-gray-800  dark:shadow-md">
+      <div class="flex flex-wrap justify-between items-center">
+        <div class="flex justify-start items-center">
+
+          <button type="button" data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer  hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <i class="bi bi-list w-[18px] h-[18px]" aria-hidden="true"></i>
+            <span class="sr-only">Toggle sidebar</span>
+          </button>
+          <a href="https://flowbite.com" class="flex mr-4">
+            <img src="https://flowbite.s3.amazonaws.com/logo.svg" class="mr-3 h-8" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white md:hidden">DIRE</span>
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hidden md:block">DIRECTEUR</span>
+        </a>
+
+      </div>
+      <div class="flex items-center lg:order-2">
+     
+        <button onclick="theme()" type="button" class="p-2 text-gray-500 rounded-lg  hover:text-gray-900 hover:bg-gray-100 dark:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white">
+          <span class="sr-only">Search</span>
+          <i class="bi bi-brightness-high w-4 h-4 dark:text-yellow-400" aria-hidden="true"></i>
+        </button>
+        <button type="button" data-dropdown-toggle="notification-dropdown" class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+          <span class="sr-only">View notifications</span>
+          <i class="bi bi-bell w-5 h-5 dark:text-blue-400" aria-hidden="true"></i>
+        </button>
+        <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700" id="notification-dropdown">
+          <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            Notifications
+          </div>
+          <div>
+            <a  class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+              <div class="flex-shrink-0">
+                <img class="w-11 h-11 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Green avatar">
+                <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                  <i class="bi bi-inbox w-2 h-2 text-white dark:text-purple-300" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="pl-3 w-full">
+                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+                  New message from <span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span>: "Hey, what's up? All set for the presentation?"
+                </div>
+                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">
+                  a few moments ago
+                </div>
+              </div>
+            </a>
+            <a  class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+              <div class="flex-shrink-0">
+                <img class="w-11 h-11 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar">
+                <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-gray-900 rounded-full border border-white dark:border-gray-700">
+                  <i class="bi bi-person-plus w-2 h-2 text-white dark:text-green-400" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="pl-3 w-full">
+                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+                  <span class="font-semibold text-gray-900 dark:text-white">Jese leos</span> and <span class="font-medium text-gray-900 dark:text-white">5 others</span> started following you.
+                </div>
+                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">
+                  10 minutes ago
+                </div>
+              </div>
+            </a>
+            <a  class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+              <div class="flex-shrink-0">
+                <img class="w-11 h-11 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="Joseph McFall avatar">
+                <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-red-600 rounded-full border border-white dark:border-gray-700">
+                  <i class="bi bi-heart w-2 h-2 text-white dark:text-red-300" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="pl-3 w-full">
+                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+                  <span class="font-semibold text-gray-900 dark:text-white">Joseph Mcfall</span> and <span class="font-medium text-gray-900 dark:text-white">141 others</span> love your story. See it and view more stories.
+                </div>
+                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">
+                  44 minutes ago
+                </div>
+              </div>
+            </a>
+            <a  class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+              <div class="flex-shrink-0">
+                <img class="w-11 h-11 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png" alt="Roberta Casas image">
+                <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-400 rounded-full border border-white dark:border-gray-700">
+                  <i class="bi bi-chat w-2 h-2 text-white dark:text-teal-300" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="pl-3 w-full">
+                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+                  <span class="font-semibold text-gray-900 dark:text-white">Leslie Livingston</span> mentioned you in a comment: <span class="font-medium text-primary-700 dark:text-primary-500">@bonnie.green</span> what do you say?
+                </div>
+                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">
+                  1 hour ago
+                </div>
+              </div>
+            </a>
+            <a  class="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-600">
+              <div class="flex-shrink-0">
+                <img class="w-11 h-11 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png" alt="Robert image">
+                <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-purple-500 rounded-full border border-white dark:border-gray-700">
+                  <i class="bi bi-camera-video w-2 h-2 text-white dark:text-indigo-300" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="pl-3 w-full">
+                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+                  <span class="font-semibold text-gray-900 dark:text-white">Robert Brown</span> posted a new video: Glassmorphism - learn how to implement the new design trend.
+                </div>
+                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">
+                  3 hours ago
+                </div>
+              </div>
+            </a>
+          </div>
+          <a  class="block py-2 text-base font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline">
+            <div class="inline-flex items-center ">
+              <i class="bi bi-eye mr-2 w-5 h-5 dark:text-cyan-400" aria-hidden="true"></i>
+              View all
+            </div>
+          </a>
+        </div>
+        <button type="button" data-dropdown-toggle="apps-dropdown" class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+          <span class="sr-only">View notifications</span>
+          <i class="bi bi-grid w-4 h-4 dark:text-purple-400" aria-hidden="true"></i>
+        </button>
+        <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="apps-dropdown">
+          <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            Apps
+          </div>
+          <div class="grid grid-cols-3 gap-4 p-4">
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-people-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-blue-400 dark:group-hover:text-blue-300" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="professeurs()">
+                Professeurs
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-people-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-green-400 dark:group-hover:text-green-300" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="eleves()">
+                Eleves
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-houses-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-yellow-500 dark:group-hover:text-yellow-400" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="classe()">
+                Classes
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-person-fill-lock mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-red-400 dark:group-hover:text-red-300" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="access()">
+                Access Key
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-bar-chart-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-red-400 dark:group-hover:text-red-300" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="stats()">
+                Statistiques
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-info-circle-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-blue-400 dark:group-hover:text-blue-300" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="info()">
+                Information
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-chat-dots-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-teal-400 dark:group-hover:text-teal-300" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="messaging()">
+                Discussions
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-person-plus-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-yellow-400 dark:group-hover:text-yellow-300" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="teacher()">
+                Ajouter un professeur
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-person-plus-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-yellow-400 dark:group-hover:text-yellow-300" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="addEleve()">
+               Ajouter un eleve
+              </div>
+            </a>
+            <a  class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+              <i class="bi bi-gear-fill mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-200" aria-hidden="true"></i>
+              <div class="text-sm font-medium text-gray-900 dark:text-white" onclick="settings()">
+                Settings
+              </div>
+            </a>
+          </div>
+        </div>
+        <button type="button" class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+          <span class="sr-only">Open user menu</span>
+          <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+        </button>
+        <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
+          <div class="py-3 px-4">
+            <span class="block text-sm font-semibold text-gray-900 dark:text-white">Neil sims</span>
+            <span class="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+          </div>
+          <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+            <li>
+              <a  class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">My profile</a>
+            </li>
+            <li>
+              <a  class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Account settings</a>
+            </li>
+          </ul>
+          <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+            <li>
+              <a  class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <i class="bi bi-heart mr-2 w-4 h-4 text-gray-400 dark:text-red-400" aria-hidden="true"></i>
+                My likes
+              </a>
+            </li>
+            <li>
+              <a  class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <i class="bi bi-stack mr-2 w-4 h-4 text-gray-400 dark:text-blue-400" aria-hidden="true"></i>
+                Collections
+              </a>
+            </li>
+            <li>
+              <a  class="flex justify-between items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <span class="flex items-center">
+                  <i class="bi bi-gem mr-2 w-4 h-4 text-primary-600 dark:text-yellow-400 dark:text-primary-500" aria-hidden="true"></i>
+                  Pro version
+                </span>
+                <i class="bi bi-chevron-right w-2.5 h-2.5 text-gray-400" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+          <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+            <li>
+              <a  class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidenav">
+  <div class="overflow-y-auto py-5 px-3 h-full">
+    <div class="flex items-center mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+      <i class="bi bi-mortarboard-fill text-3xl text-blue-600 dark:text-blue-400 mr-3"></i>
+      <span class="text-xl font-semibold text-gray-800 dark:text-white">HOME WORK</span>
+    </div>
+
+    <ul class="space-y-2">
+      <li onclick="home()">
+        <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+          <i class="bi bi-speedometer2 w-5 h-5 text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 mr-3"></i>
+          <span>Tableau de bord</span>
+        </a>
+      </li>
+      <li onclick="stats()">
+        <p class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-bar-chart-fill w-5 h-5 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 mr-3"></i>
+          <span class="flex-1 whitespace-nowrap">Statistiques</span>
+        </p>
+      </li>
+      <li onclick="school()">
+        <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+          <i class="bi bi-houses w-5 h-5 text-green-600 dark:text-green-400 group-hover:text-green-700 dark:group-hover:text-green-300 mr-3"></i>
+          <span>Mon Ecoles</span>
+        </a>
+      </li>
+      <li onclick="classe()">
+        <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+          <i class="bi bi-building-add w-5 h-5 text-purple-600 dark:text-purple-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 mr-3"></i>
+          <span>Classes</span>
+        </a>
+      </li>
+      <li onclick="professeurs()">
+        <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+          <i class="bi bi-building-add w-5 h-5 text-yellow-600 dark:text-yellow-400 group-hover:text-yellow-700 dark:group-hover:text-yellow-300 mr-3"></i>
+          <span>Professeurs</span>
+        </a>
+      </li>
+      <li onclick="eleves()">
+        <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+          <i class="bi bi-building-add w-5 h-5 text-yellow-500 dark:text-yellow-800 group-hover:text-yellow-700 dark:group-hover:tex
+            t-yellow-300 mr-3"></i>
+          <span>Eleves</span>
+        </a>
+      </li>
+
+      <li onclick="messaging()">
+        <p class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-chat-dots w-5 h-5 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 mr-3"></i>
+          <span class="flex-1 whitespace-nowrap">Discussions</span>
+          <span class="inline-flex justify-center items-center w-5 h-5 text-xs font-semibold text-white bg-blue-500 rounded-full"><i class="bi bi-messenger"></i></span>
+        </p>
+      </li>
+
+      <li>
+        <button type="button" class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-settings" data-collapse-toggle="dropdown-settings">
+          <i class="bi bi-gear-fill w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 mr-3"></i>
+          <span class="flex-1 text-left whitespace-nowrap">Paramètres</span>
+          <i class="bi bi-chevron-down w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+        </button>
+        <ul id="dropdown-settings" class="hidden py-2 space-y-2">
+          <li onclick="profil()">
+            <a class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><i class="bi bi-person-badge text-gray-500 dark:text-gray-400 mr-3"></i>Mon profil</a>
+          </li>
+          <li onclick="settings()">
+            <a class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><i class="bi bi-gear text-gray-500 dark:text-gray-400 mr-3"></i>Settings</a>
+          </li>
+        </ul>
+      </li>
+      <li onclick="access()">
+        <p class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-person-fill-lock w-5 h-5 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 mr-3"></i>
+          <span class="flex-1 whitespace-nowrap">Access Key</span>
+        </p>
+      </li>
+
+      <li class="pt-5 mt-5 border-t border-gray-200 dark:border-gray-700"></li>
+
+      <li onclick="info()">
+        <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <i class="bi bi-info-circle-fill w-5 h-5 text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 mr-3"></i>
+          <span>Info</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <a  class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600"><i class="bi bi-tools w-5 h-5"></i></a>
+    <a  class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600"><i class="bi bi-gear w-5 h-5"></i></a>
+    <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600"><i class="bi bi-translate w-5 h-5"></i></button>
+  </div>
+</aside>
+
+<div class="big-container">
+  <div class="home">
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 pt-8">
+  <div class="container mx-auto px-4 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-2 dark:text-white">HOME-WORK</h1>
+    <p class="text-xl max-w-3xl mx-auto dark:text-white">La solution tout‑en‑un pour piloter votre établissement : gestion centralisée, analyses stratégiques et communication fluide.</p>
+  </div>
+</header>
+
+<main class="container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Fonctionnalités clés du directeur</h2>
+     <div class="order-1 lg:order-2 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg p-5 shadow-lg border border-white/30 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-3">
+                <i class="bi bi-eye-fill text-white text-lg"></i>
+            </div>
+            <h4 class="text-lg font-bold text-gray-800 dark:text-white">Supervision temps réel</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Effectifs, présences, résultats : une vision instantanée.</p>
+        </div>
+        <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg p-5 shadow-lg border border-white/30 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-3">
+                <i class="bi bi-people-fill text-white text-lg"></i>
+            </div>
+            <h4 class="text-lg font-bold text-gray-800 dark:text-white">Gestion des équipes</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Professeurs, personnel : recrutement, affectations, évaluations.</p>
+        </div>
+        <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg p-5 shadow-lg border border-white/30 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-3">
+                <i class="bi bi-bar-chart-fill text-white text-lg"></i>
+            </div>
+            <h4 class="text-lg font-bold text-gray-800 dark:text-white">Tableaux de bord sur mesure</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">KPIs, tendances, alertes budgétaires personnalisables.</p>
+        </div>
+        <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg p-5 shadow-lg border border-white/30 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-3">
+                <i class="bi bi-chat-fill text-white text-lg"></i>
+            </div>
+            <h4 class="text-lg font-bold text-gray-800 dark:text-white">Communication institutionnelle</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Messagerie sécurisée, diffusion d’alertes et actualités.</p>
+        </div>
+        <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg p-5 shadow-lg border border-white/30 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-3">
+                <i class="bi bi-file-text-fill text-white text-lg"></i>
+            </div>
+            <h4 class="text-lg font-bold text-gray-800 dark:text-white">Rapports automatisés</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Inspections, conseil d’administration : génération en un clic.</p>
+        </div>
+        <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg p-5 shadow-lg border border-white/30 dark:border-gray-700 hover:scale-[1.02] transition-transform">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-3">
+                <i class="bi bi-shield-lock-fill text-white text-lg"></i>
+            </div>
+            <h4 class="text-lg font-bold text-gray-800 dark:text-white">Sécurité & conformité</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">RGPD, double authentification, traçabilité.</p>
+        </div>
+    </div>
+</div>
+   <div class="mb-20  mt-12">
+                <h3 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-12">
+                    Comment ça fonctionne ?
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center group">
+                        <div class="relative w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="bi bi-cloud-upload text-3xl text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">1. Centralisation</h4>
+                        <p class="text-gray-600 dark:text-gray-400">Importez vos données existantes en un clic. Synchronisation continue avec tous les services.</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="relative w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="bi bi-shield-lock text-3xl text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">2. Sécurité & rôles</h4>
+                        <p class="text-gray-600 dark:text-gray-400">Accès granulaires : chaque utilisateur ne voit que ce qui lui est permis. Authentification renforcée.</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="relative w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="bi bi-bar-chart-steps text-3xl text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">3. Décision éclairée</h4>
+                        <p class="text-gray-600 dark:text-gray-400">Analysez les performances, anticipez les besoins, pilotez votre établissement en toute confiance.</p>
+                    </div>
+                </div>
+            </div>
+            
+</main>
+  </div>
+  <div class="classe">
+<section class="dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+    <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Rechercher, modifier et ajouter des classes</h2>
+      <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">
+        Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.
+      </p>
+      <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+  <div class="relative w-full">
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+      <i class="bi bi-search text-gray-400 dark:text-gray-500"></i>
+    </div>
+    <input 
+      type="text" 
+      placeholder="Rechercher une classe..." 
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    >
+  </div>
+  <button type="button" class="flex items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >
+    <i class="bi bi-search mr-2"></i>
+    Rechercher
+  </button>
+  <button type="button" id="createProductButton" class="flex items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default">
+    <i class="bi bi-plus-lg mr-2"></i>
+    Ajouter une classe
+  </button>
+</div>
+    </div>
+    <div class=" lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+  
+      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-200 shadow dark:border-gray-700 xl:p-8 dark:bg-gray-800 dark:text-white mb-2">
+        <h3 class="mb-4 text-2xl font-semibold">Classe de 1HSC</h3>
+        <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
+          Description de la classe c'est une classe talentuese des eleves notre classe
+        </p>
+        <div class="flex justify-center items-baseline my-8">
+          <span class="mr-2 text-5xl font-extrabold">180</span>
+          <span class="text-gray-500 dark:text-gray-400">/eleves</span>
+        </div>
+           <div class="mb-4 mt-4">
+        <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Moyenne de la classe</p>
+        <div class="mt-1 flex items-center gap-3">
+          <div class="flex-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700">
+            <div class="h-2 bg-blue-600 rounded-full dark:bg-blue-500" style="width: 74%"></div>
+          </div>
+          <span class="text-lg font-bold text-gray-900 dark:text-white"> &nbsp; 14.8/20</span>
+        </div>
+        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Moyenne générale de la classe</p>
+      </div>
+      
+        <a class="text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white dark:focus:ring-primary-900">Voir la classe</a>
+      </div>
+    
+    </div>
+  </div>
+</section>
+  </div>
+  <div class="profil">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+        
+        <div class="h-24 bg-gradient-to-r from-blue-500 to-purple-600 mb-2"></div>
+        
+      
+        <div class="flex justify-center -mt-12">
+            <div class="w-24 h-24 rounded-full border-4 border-white dark:border-gray-800 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                <i class="bi bi-person-circle text-5xl text-gray-600 dark:text-gray-300"></i>
+            </div>
+        </div>
+
+
+        <div class="p-6">
+            <h1 class="text-2xl font-bold text-center text-gray-900 dark:text-white">Jean Dupont</h1>
+            <p class="text-center text-gray-600 dark:text-gray-400">@jeandupont</p>
+
+            <div class="mt-6 space-y-3">
+
+                <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <i class="bi bi-person-badge text-blue-600 dark:text-blue-400 text-xl mr-3"></i>
+                    <div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Nom complet</p>
+                        <p class="font-medium text-gray-900 dark:text-white">Jean Dupont</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <i class="bi bi-phone text-green-600 dark:text-green-400 text-xl mr-3"></i>
+                    <div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Numéro</p>
+                        <p class="font-medium text-gray-900 dark:text-white">+243 812 345 678</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <i class="bi bi-envelope text-purple-600 dark:text-purple-400 text-xl mr-3"></i>
+                    <div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Email</p>
+                        <p class="font-medium text-gray-900 dark:text-white">jean.dupont@email.com</p>
+                    </div>
+                </div>
+                <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <i class="bi bi-person-circle text-purple-600 dark:text-purple-400 text-xl mr-3"></i>
+                    <div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Role</p>
+                        <p class="font-medium text-gray-900 dark:text-white">Directeur General</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <div class="text-center p-4 bg-blue-50 dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">2</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Classe</p>
+                </div>
+                <div class="text-center p-4 bg-green-50 dark:bg-gray-800 rounded-lg border border-green-200 dark:border-green-800">
+                    <p class="text-2xl font-bold text-green-600 dark:text-green-400">3</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Professeurs</p>
+                </div>
+                <div class="text-center p-4 bg-blue-50 dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">2</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Eleves</p>
+                </div>
+                <div class="text-center p-4 bg-green-50 dark:bg-gray-800 rounded-lg border border-green-200 dark:border-green-800">
+                    <p class="text-2xl font-bold text-green-600 dark:text-green-400">3</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Membres</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-right">
+                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition border border-blue-700 dark:border-blue-600">
+                    <i class="bi bi-pencil-square mr-2"></i>Modifier le profil
+                </button>
+            </div>
+        </div>
+    </div>
+  </div> 
+  <div class="eleve">
+    <div class="bg-gray-50 dark:bg-gray-900 py-8">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-screen-mdbtext-center mb-8 lg:mb-12">
+      <h2 class="mb-4 text-3xl sm:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+        Rechercher, modifier et ajouter des élèves
+      </h2>
+      <p class="mb-2 font-light text-gray-500 sm:text-xl dark:text-gray-400">
+        Gérez facilement la liste de vos élèves : recherche rapide, modification et suppression en quelques clics.
+      </p>
+
+    </div>
+ <section class="dark:bg-gray-900 py-2">
+  <div class="container mx-auto px-0 sm:px-0 lg:px-2 max-w-7xl ">
+    <div class="relative  dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600">
+      <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+        
+        <div class="w-full md:flex-1">
+          <form class="flex items-center">
+            <label for="simple-search" class="sr-only">Rechercher</label>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <i class="bi bi-search text-gray-500 dark:text-gray-400"></i>
+              </div>
+              <input 
+                type="text" 
+                id="simple-search" 
+                class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                placeholder="Rechercher un élève..." 
+                required="">
+            </div>
+          </form>
+        </div>
+
+        <div class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+          <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onclick="addEleve()">
+            <i class="bi bi-plus-lg mr-2"></i>
+            Ajouter un élève
+          </button>
+
+          <div class="flex items-center w-full space-x-3 md:w-auto">
+            <button 
+              id="filterDropdownButton" 
+              data-dropdown-toggle="filterDropdown" 
+              class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" 
+              type="button">
+              <i class="bi bi-funnel mr-2 text-gray-400"></i>
+              Filtrer
+              <i class="bi bi-chevron-down ml-2"></i>
+            </button>
+
+            <div id="filterDropdown" class="hidden z-10 w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+              <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Classe</h6>
+              <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+                <li class="flex items-center">
+                  <input id="filter-1hsc" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                  <label for="filter-1hsc" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">1HSC (24)</label>
+                </li>
+                <li class="flex items-center">
+                  <input id="filter-2sia" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                  <label for="filter-2sia" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">2SIA (18)</label>
+                </li>
+                <li class="flex items-center">
+                  <input id="filter-3gel" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                  <label for="filter-3gel" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">3GEL (12)</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+  <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+    <thead class="bg-gray-100 dark:bg-gray-600">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom complet</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Classe</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">1</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Sophie Martin</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">1HSC</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">sophie.martin@example.com</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="relative">
+            <button id="dropdownMenuButton1" data-dropdown-toggle="dropdown1" class="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white" type="button">
+              <i class="bi bi-three-dots-vertical text-xl"></i>
+            </button>
+            <div id="dropdown1" class="hidden z-10 w-36 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><i class="bi bi-pencil-square mr-2"></i> Modifier</a></li>
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400"><i class="bi bi-trash3 mr-2"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">2</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Thomas Dubois</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">2SIA</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">thomas.dubois@example.com</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="relative">
+            <button id="dropdownMenuButton2" data-dropdown-toggle="dropdown2" class="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white" type="button">
+              <i class="bi bi-three-dots-vertical text-xl"></i>
+            </button>
+            <div id="dropdown2" class="hidden z-10 w-36 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><i class="bi bi-pencil-square mr-2"></i> Modifier</a></li>
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400"><i class="bi bi-trash3 mr-2"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">3</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Julie Moreau</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">1HSC</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">julie.moreau@example.com</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="relative">
+            <button id="dropdownMenuButton3" data-dropdown-toggle="dropdown3" class="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white" type="button">
+              <i class="bi bi-three-dots-vertical text-xl"></i>
+            </button>
+            <div id="dropdown3" class="hidden z-10 w-36 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><i class="bi bi-pencil-square mr-2"></i> Modifier</a></li>
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400"><i class="bi bi-trash3 mr-2"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">4</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Lucas Bernard</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">2SIA</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">lucas.bernard@example.com</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="relative">
+            <button id="dropdownMenuButton4" data-dropdown-toggle="dropdown4" class="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white" type="button">
+              <i class="bi bi-three-dots-vertical text-xl"></i>
+            </button>
+            <div id="dropdown4" class="hidden z-10 w-36 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><i class="bi bi-pencil-square mr-2"></i> Modifier</a></li>
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400"><i class="bi bi-trash3 mr-2"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+</div>
+  </div>
+  <div class="prof">
+    <div class="bg-gray-50 dark:bg-gray-900 py-8">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-screen-mdbtext-center mb-8 lg:mb-12">
+      <h2 class="mb-4 text-3xl sm:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+        Rechercher, modifier et ajouter des Professeurs
+      </h2>
+      <p class="mb-2 font-light text-gray-500 sm:text-xl dark:text-gray-400">
+        Gérez facilement la liste de vos enseignants : recherche rapide, modification et suppression en quelques clics.
+      </p>
+
+    </div>
+ <section class="dark:bg-gray-900 py-2">
+  <div class="container mx-auto px-0 sm:px-0 lg:px-2 max-w-7xl ">
+    <div class="relative  dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600">
+      <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+        
+        <div class="w-full md:flex-1">
+          <form class="flex items-center">
+            <label for="simple-search" class="sr-only">Rechercher</label>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <i class="bi bi-search text-gray-500 dark:text-gray-400"></i>
+              </div>
+              <input 
+                type="text" 
+                id="simple-search" 
+                class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                placeholder="Rechercher un Professeurs..." 
+                required="">
+            </div>
+          </form>
+        </div>
+        <div class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+          <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onclick="teacher()">
+            <i class="bi bi-plus-lg mr-2"></i>
+            Ajouter un Professeur
+          </button>
+
+          <div class="flex items-center w-full space-x-3 md:w-auto">
+            <button 
+              id="filterDropdownButton1" 
+              data-dropdown-toggle="filterDropdown1" 
+              class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" 
+              type="button">
+              <i class="bi bi-funnel mr-2 text-gray-400"></i>
+              Filtrer
+              <i class="bi bi-chevron-down ml-2"></i>
+            </button>
+            <div id="filterDropdown1" class="hidden z-10 w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+              <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Matière</h6>
+              <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton1">
+                <li class="flex items-center">
+                  <input id="filter-1hsc" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                  <label for="filter-1hsc" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Francais</label>
+                </li>
+                <li class="flex items-center">
+                  <input id="filter-2sia" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                  <label for="filter-2sia" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Mathématiques</label>
+                </li>
+                <li class="flex items-center">
+                  <input id="filter-3gel" type="checkbox" value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                  <label for="filter-3gel" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Physique</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+   <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+  <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+    <thead class="bg-gray-100 dark:bg-gray-600">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom complet</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Matière</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">1</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Sophie Martin</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">sophie.martin@example.com</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Mathématiques</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="relative">
+            <button id="ProfdropdownMenuButton1" data-dropdown-toggle="Profdropdown1" class="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white" type="button">
+              <i class="bi bi-three-dots-vertical text-xl"></i>
+            </button>
+            <div id="Profdropdown1" class="hidden z-10 w-36 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><i class="bi bi-pencil-square mr-2"></i> Modifier</a></li>
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400"><i class="bi bi-trash3 mr-2"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">2</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Thomas Dubois</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">thomas.dubois@example.com</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Français</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="relative">
+            <button id="ProfdropdownMenuButton2" data-dropdown-toggle="Profdropdown2" class="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white" type="button">
+              <i class="bi bi-three-dots-vertical text-xl"></i>
+            </button>
+            <div id="Profdropdown2" class="hidden z-10 w-36 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><i class="bi bi-pencil-square mr-2"></i> Modifier</a></li>
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400"><i class="bi bi-trash3 mr-2"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">3</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Julie Moreau</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">julie.moreau@example.com</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Physique</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="relative">
+            <button id="ProfdropdownMenuButton3" data-dropdown-toggle="Profdropdown3" class="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white" type="button">
+              <i class="bi bi-three-dots-vertical text-xl"></i>
+            </button>
+            <div id="Profdropdown3" class="hidden z-10 w-36 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><i class="bi bi-pencil-square mr-2"></i> Modifier</a></li>
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400"><i class="bi bi-trash3 mr-2"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">4</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Lucas Bernard</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">lucas.bernard@example.com</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">Histoire</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="relative">
+            <button id="ProfdropdownMenuButton4" data-dropdown-toggle="Profdropdown4" class="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white" type="button">
+              <i class="bi bi-three-dots-vertical text-xl"></i>
+            </button>
+            <div id="Profdropdown4" class="hidden z-10 w-36 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"><i class="bi bi-pencil-square mr-2"></i> Modifier</a></li>
+                <li><a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400"><i class="bi bi-trash3 mr-2"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+</div>
+  </div>
+  <div class="settings">
+    <div class="bg-white dark:bg-gray-800">
+   
+    <main class="max-w-3xl mx-auto px-4 py-8 sm:py-12">
+      
+        <div class="text-center mb-8 sm:mb-10">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Modifier les informations de votre école</h1>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">Mettez à jour les détails de votre établissement</p>
+        </div>
+
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5 sm:p-6 md:p-8">
+            <form id="createSchoolForm">
+
+                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <i class="bi bi-info-circle text-blue-600 dark:text-blue-400 mr-2"></i>
+                    Informations générales
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="schoolName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-building mr-1 text-blue-600 dark:text-blue-400"></i>Nom de l'école *
+                        </label>
+                        <input type="text" id="schoolName" name="schoolName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Ex: Lycée Jean Jaurès" required>
+                    </div>
+
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="schoolType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-tag mr-1 text-blue-600 dark:text-blue-400"></i>Type *
+                        </label>
+                        <select id="schoolType" name="schoolType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+                            <option value="" disabled selected>Choisissez un type</option>
+                            <option value="public">Public</option>
+                            <option value="prive">Privé</option>
+                            <option value="prive_sous_contrat">Privé sous contrat</option>
+                        </select>
+                    </div>
+
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-geo-alt mr-1 text-blue-600 dark:text-blue-400"></i>Adresse *
+                        </label>
+                        <input type="text" id="address" name="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Numéro et nom de rue" required>
+                    </div>
+
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="postalCode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-mailbox mr-1 text-blue-600 dark:text-blue-400"></i>Code postal *
+                        </label>
+                        <input type="text" id="postalCode" name="postalCode" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="75001" required>
+                    </div>
+                    <div>
+                        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-building mr-1 text-blue-600 dark:text-blue-400"></i>Ville *
+                        </label>
+                        <input type="text" id="city" name="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Paris" required>
+                    </div>
+
+
+                    <div>
+                        <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-flag mr-1 text-blue-600 dark:text-blue-400"></i>Pays
+                        </label>
+                        <input type="text" id="country" name="country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="France">
+                    </div>
+                </div>
+
+
+                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <i class="bi bi-envelope text-blue-600 dark:text-blue-400 mr-2"></i>
+                    Contact
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-envelope-at mr-1 text-blue-600 dark:text-blue-400"></i>Email *
+                        </label>
+                        <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="contact@ecole.fr" required>
+                    </div>
+
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-telephone mr-1 text-blue-600 dark:text-blue-400"></i>Téléphone
+                        </label>
+                        <input type="tel" id="phone" name="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="01 23 45 67 89">
+                    </div>
+
+
+                    <div class="col-span-2">
+                        <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-globe mr-1 text-blue-600 dark:text-blue-400"></i>Site web
+                        </label>
+                        <input type="url" id="website" name="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="https://www.ecole.fr">
+                    </div>
+                </div>
+
+
+                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <i class="bi bi-pencil-square text-blue-600 dark:text-blue-400 mr-2"></i>
+                    Description
+                </h2>
+                <div class="mb-6">
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Brève présentation (optionnelle)
+                    </label>
+                    <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"></textarea>
+                </div>
+
+
+                <div class="flex flex-col sm:flex-row sm:justify-end gap-3">
+                    <button type="reset" class="px-5 py-2.5 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                        <i class="bi bi-pencil-square mr-2 dark:text-white"></i>Modifier
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+            <i class="bi bi-asterisk text-red-500 dark:text-red-400"></i> Les champs marqués d'un astérisque sont obligatoires.
+        </p>
+    </main>
+      
+    </div>
+  </div>
+  <div class="info-school">
+    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
+  <!-- En‑tête -->
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+      <i class="bi bi-building mr-2 text-blue-600"></i> Notre école
+    </h2>
+    <span class="text-sm text-gray-500 dark:text-gray-400">Depuis 1995</span>
+  </div>
+
+  <!-- Description -->
+  <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+    Fondée en 1995, notre établissement offre un cadre d’apprentissage moderne et inclusif. 
+    Nous formons les leaders de demain grâce à une pédagogie innovante et un corps enseignant dévoué.
+  </p>
+
+  <!-- Grille d’informations -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <!-- Coordonnées -->
+    <div class="space-y-3">
+      <div class="flex items-start">
+        <i class="bi bi-geo-alt-fill text-blue-600 dark:text-blue-400 mr-3 mt-1"></i>
+        <div>
+          <p class="font-medium text-gray-900 dark:text-white">Adresse</p>
+          <p class="text-gray-600 dark:text-gray-400">123 Avenue des Écoles, 75001 Paris, France</p>
+        </div>
+      </div>
+      <div class="flex items-start">
+        <i class="bi bi-telephone-fill text-blue-600 dark:text-blue-400 mr-3 mt-1"></i>
+        <div>
+          <p class="font-medium text-gray-900 dark:text-white">Téléphone</p>
+          <p class="text-gray-600 dark:text-gray-400">+33 1 23 45 67 89</p>
+        </div>
+      </div>
+      <div class="flex items-start">
+        <i class="bi bi-envelope-fill text-blue-600 dark:text-blue-400 mr-3 mt-1"></i>
+        <div>
+          <p class="font-medium text-gray-900 dark:text-white">Email</p>
+          <p class="text-gray-600 dark:text-gray-400">contact@ecole-exemple.fr</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chiffres clés -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 text-center">
+        <i class="bi bi-people-fill text-2xl text-blue-600 dark:text-blue-400 mb-1 block"></i>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white">32</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Classes</p>
+      </div>
+      <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 text-center">
+        <i class="bi bi-person-video3 text-2xl text-blue-600 dark:text-blue-400 mb-1 block"></i>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white">48</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Enseignants</p>
+      </div>
+      <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 text-center">
+        <i class="bi bi-mortarboard-fill text-2xl text-blue-600 dark:text-blue-400 mb-1 block"></i>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white">850</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Élèves</p>
+      </div>
+      <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 text-center">
+        <i class="bi bi-calendar-check-fill text-2xl text-blue-600 dark:text-blue-400 mb-1 block"></i>
+        <p class="text-2xl font-bold text-gray-900 dark:text-white">95%</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Réussite examens</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-4 text-center">
+    <a  class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 inline-flex items-center text-sm font-medium">
+      En savoir plus
+      <i class="bi bi-arrow-right ml-1"></i>
+    </a>
+  </div>
+</div>
+  </div>
+  <div class="add-student">
+    <div class="bg-white dark:bg-gray-900">
+   
+    <main class="max-w-3xl mx-auto px-4 py-8 sm:py-12">
+      
+        <div class="text-center mb-8 sm:mb-10">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Modifier les eleves dans votre école</h1>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">Ajouter des eleves dans votre établissement</p>
+        </div>
+
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5 sm:p-6 md:p-8">
+            <form id="createSchoolForm1">
+
+                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <i class="bi bi-info-circle text-blue-600 dark:text-blue-400 mr-2"></i>
+                    Informations générales
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="schoolName1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-building mr-1 text-blue-600 dark:text-blue-400"></i>Nom de l'éleve *
+                        </label>
+                        <input type="text" id="schoolName1" name="schoolName1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Ex: Jean Jaurès" required>
+                    </div>
+
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="schoolType2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-tag mr-1 text-blue-600 dark:text-blue-400"></i>Classe *
+                        </label>
+                        <select id="schoolType2" name="schoolType2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+                            <option value="" disabled selected>Choisissez une classe</option>
+                            <option value="3H">3H</option>
+                            <option value="2H">2H</option>
+                            <option value="1H">1H</option>
+                        </select>
+                    </div>
+                    
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="address1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-geo-alt mr-1 text-blue-600 dark:text-blue-400"></i>Adresse *
+                        </label>
+                        <input type="text" id="address1" name="address1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Numéro et nom de rue" required>
+                    </div>
+
+
+                 
+            
+                </div>
+
+
+                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <i class="bi bi-envelope text-blue-600 dark:text-blue-400 mr-2"></i>
+                    Contact
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="email1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-envelope-at mr-1 text-blue-600 dark:text-blue-400"></i>Email *
+                        </label>
+                        <input type="email" id="email1" name="email1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="contact@ecole.fr" required>
+                    </div>
+
+
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="phone1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <i class="bi bi-telephone mr-1 text-blue-600 dark:text-blue-400"></i>Téléphone
+                        </label>
+                        <input type="tel" id="phone1" name="phone1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="01 23 45 67 89">
+                    </div>
+
+                <div class="flex flex-col sm:flex-row sm:justify-end gap-3">
+                    <button type="reset" class="px-5 py-2.5 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                        <i class="bi bi-plus-lg mr-2 dark:text-white"></i>Ajouter 
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+            <i class="bi bi-asterisk text-red-500 dark:text-red-400"></i> Les champs marqués d'un astérisque sont obligatoires.
+        </p>
+    </main>
+      
+    </div>
+  </div>
+</div>
+  <div class="add-teacher">
+    <div class="bg-white dark:bg-gray-900">
+        <main class="max-w-3xl mx-auto px-4 py-8 sm:py-12">
+            <div class="text-center mb-8 sm:mb-10">
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Gérer les professeurs dans votre école</h1>
+                <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">Ajouter des professeurs dans votre établissement</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5 sm:p-6 md:p-8">
+                <form id="createTeacherForm">
+
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                        <i class="bi bi-person-badge text-blue-600 dark:text-blue-400 mr-2"></i>
+                        Informations générales
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="teacherName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <i class="bi bi-person mr-1 text-blue-600 dark:text-blue-400"></i>Nom du professeur *
+                            </label>
+                            <input type="text" id="teacherName" name="teacherName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Ex: Marie Curie" required>
+                        </div>
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="teacherSubject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <i class="bi bi-book mr-1 text-blue-600 dark:text-blue-400"></i>Matière enseignée *
+                            </label>
+                            <input type="text" id="teacherSubject" name="teacherSubject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Ex: Mathématiques" required>
+                        </div>
+
+                        <div class="col-span-2 md:col-span-1">
+                           <label for="classe" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <i class="bi bi-building-add mr-1 text-blue-600 dark:text-blue-400"></i>Attribut classe*
+                            </label>
+                          <button id="dropdownDefaultA"
+                          name="classe" data-dropdown-toggle="dropdownA" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="button">Attribuer une classe
+    <i class="bi bi-chevron-down"></i>
+    </button>
+    <div id="dropdownA" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+      Classe
+    </h6>
+    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+      <li class="flex items-center">
+        <input id="apple" type="checkbox" value=""
+          class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+
+        <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+          Apple (56)
+        </label>
+      </li>
+
+      <li class="flex items-center">
+        <input id="fitbit" type="checkbox" value=""
+          class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+
+        <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+          Fitbit (56)
+        </label>
+      </li>
+
+      <li class="flex items-center">
+        <input id="dell" type="checkbox" value=""
+          class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+
+        <label for="dell" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+          Dell (56)
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="teacherDepartment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <i class="bi bi-diagram-3 mr-1 text-blue-600 dark:text-blue-400"></i>Département / Spécialité
+                            </label>
+                            <input type="text" id="teacherDepartment" name="teacherDepartment" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Ex: Sciences exactes">
+                        </div>
+                    </div>
+
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                        <i class="bi bi-envelope text-blue-600 dark:text-blue-400 mr-2"></i>
+                        Contact
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="teacherEmail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <i class="bi bi-envelope-at mr-1 text-blue-600 dark:text-blue-400"></i>Email *
+                            </label>
+                            <input type="email" id="teacherEmail" name="teacherEmail" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="professeur@ecole.fr" required>
+                        </div>
+
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="teacherPhone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <i class="bi bi-telephone mr-1 text-blue-600 dark:text-blue-400"></i>Téléphone
+                            </label>
+                            <input type="tel" id="teacherPhone" name="teacherPhone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="01 23 45 67 89">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:justify-end gap-3">
+                        
+                        <button type="submit" class="px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <i class="bi bi-plus-lg mr-2"></i>Ajouter le professeur
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+                <i class="bi bi-asterisk text-red-500 dark:text-red-400"></i> Les champs marqués d'un astérisque sont obligatoires.
+            </p>
+        </main>
+    </div>
+</div>
+  <div class="keyAccess">
+<div class="bg-white dark:bg-gray-900 p-6 rounded-lg ">
+    <div class="flex justify-center -mt-12">
+        <div class="w-24 h-24 rounded-full border-4 border-white dark:border-gray-800 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+            <i class="bi bi-person-fill-lock text-5xl text-blue-600 dark:text-gray-300"></i>
+        </div>
+    </div>
+
+    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center mt-3">Générer une clé d'accès</h2>
+
+    <div class="mb-4">
+        <label for="keyType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white uppercase">Type de clé</label>
+        <select id="keyType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+          <option value="">Selectionner le type de cle</option>
+            <option value="professeur">Professeurs</option>
+            <option value="parent">  <i class="bi bi-key-fill text-blue-600 dark:text-blue-400 text-xl mr-3"></i>Parents</option>
+            <option value="eleve">Élèves</option>
+        </select>
+    </div>
+
+    <div class="flex items-center space-x-2 mb-4">
+        <input 
+            type="text" 
+            name="access_key"
+            value="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+            readonly 
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white font-mono"
+        >
+        <button 
+            type="button"
+            class="flex items-center justify-center p-2.5 text-gray-500 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+            title="Copier"
+        >
+            <i class="bi bi-files w-5 h-5"></i>
+        </button>
+    </div>
+    
+    <a class="flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700">
+        <i class="bi bi-key-fill mr-2"></i>
+        Générer une nouvelle clé
+    </a>
+    
+    <div class="mt-6 space-y-3">
+        <label for="keyType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white uppercase">clé Générer</label>
+        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+            <div class="flex items-center flex-1">
+                <i class="bi bi-key-fill text-blue-600 dark:text-blue-400 text-xl mr-3"></i>
+                <div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Access Key (Prof)</p>
+                    <p class="font-medium text-gray-900 dark:text-white">Prof-263837@&-€7282828</p>
+                </div>
+            </div>
+          
+            <div class="relative">
+                <button id="dropdownMenuIconButton1" data-dropdown-toggle="dropdownDots1" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 rounded-lg transition-colors" type="button">
+                    <i class="bi bi-three-dots-vertical w-5 h-5"></i>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownDots1" class="hidden z-10 w-40 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                        <li>
+                            <a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="bi bi-files mr-2"></i> Copier
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400">
+                                <i class="bi bi-trash3 mr-2"></i> Supprimer
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clé 2 -->
+        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+            <div class="flex items-center flex-1">
+                <i class="bi bi-key-fill text-blue-600 dark:text-blue-400 text-xl mr-3"></i>
+                <div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Access Key (Élève)</p>
+                    <p class="font-medium text-gray-900 dark:text-white">Élève-9f8e7d6c5b4a3210</p>
+                </div>
+            </div>
+            <div class="relative">
+                <button id="dropdownMenuIconButton2" data-dropdown-toggle="dropdownDots2" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 rounded-lg transition-colors" type="button">
+                    <i class="bi bi-three-dots-vertical w-5 h-5"></i>
+                </button>
+                <div id="dropdownDots2" class="hidden z-10 w-40 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                        <li>
+                            <a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="bi bi-files mr-2"></i> Copier
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400">
+                                <i class="bi bi-trash3 mr-2"></i> Supprimer
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clé 3 -->
+        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+            <div class="flex items-center flex-1">
+                <i class="bi bi-key-fill text-blue-600 dark:text-blue-400 text-xl mr-3"></i>
+                <div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Access Key (Parent)</p>
+                    <p class="font-medium text-gray-900 dark:text-white">Parent-7f6e5d4c3b2a1908</p>
+                </div>
+            </div>
+            <div class="relative">
+                <button id="dropdownMenuIconButton3" data-dropdown-toggle="dropdownDots3" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 rounded-lg transition-colors" type="button">
+                    <i class="bi bi-three-dots-vertical w-5 h-5"></i>
+                </button>
+                <div id="dropdownDots3" class="hidden z-10 w-40 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                        <li>
+                            <a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="bi bi-files mr-2"></i> Copier
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400">
+                                <i class="bi bi-trash3 mr-2"></i> Supprimer
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  </div>
+  <div class="messenger bg-gray-100 dark:bg-gray-900">
+    <div class="p-5 border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Discussions</h2>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <i class="bi bi-search text-gray-400 dark:text-gray-500"></i>
+            </div>
+            <input type="text" 
+                   class="w-full pl-10 pr-4 py-2 bg-gray-100 dark:bg-gray-700 border-0 rounded-lg text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+                   placeholder="Rechercher une discussion...">
+        </div>
+    </div>
+
+    <div class="flex-1 overflow-y-auto px-1 md:p-8">
+
+        <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+            <div class="relative flex-shrink-0">
+                <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    MM
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            </div>
+            <div class="ml-3 flex-1 min-w-0">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-semibold text-gray-900 dark:text-white truncate">Marie Martin</h3>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">11:15</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Je n'ai pas compris l'exercice 3...</p>
+                <span class="inline-flex items-center text-xs font-medium text-blue-600 dark:text-blue-400 mt-1">
+                    <i class="bi bi-check2 mr-1"></i>Envoyé
+                </span>
+            </div>
+        </div>
+
+        <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer bg-blue-50/50 dark:bg-gray-700/30">
+            <div class="relative flex-shrink-0">
+                <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    PL
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            </div>
+            <div class="ml-3 flex-1 min-w-0">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-semibold text-gray-900 dark:text-white truncate">Pierre Lefebvre</h3>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">09:45</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Salut, tu as vu le nouveau devoir d...</p>
+                <span class="inline-flex items-center text-xs font-medium text-blue-600 dark:text-blue-400 mt-1">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full mr-1">2</span>
+                    Nouveaux messages
+                </span>
+            </div>
+        </div>
+
+        <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+            <div class="relative flex-shrink-0">
+                <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    SD
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-gray-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            </div>
+            <div class="ml-3 flex-1 min-w-0">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-semibold text-gray-900 dark:text-white truncate">Sophie Dubois</h3>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">Hier</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Merci pour ton aide !</p>
+                <span class="inline-flex items-center text-xs font-medium text-gray-500 dark:text-gray-400 mt-1">
+                    <i class="bi bi-check2-all mr-1"></i>Lu
+                </span>
+            </div>
+        </div>
+
+        <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+            <div class="relative flex-shrink-0">
+                <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    TC
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            </div>
+            <div class="ml-3 flex-1 min-w-0">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-semibold text-gray-900 dark:text-white truncate">Thomas Chevalier</h3>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">Hier</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">On se voit demain ?</p>
+                <span class="inline-flex items-center text-xs font-medium text-blue-600 dark:text-blue-400 mt-1">
+                    <i class="bi bi-check2 mr-1"></i>Envoyé
+                </span>
+            </div>
+        </div>
+
+        <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+            <div class="relative flex-shrink-0">
+                <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    LR
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-gray-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            </div>
+            <div class="ml-3 flex-1 min-w-0">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-semibold text-gray-900 dark:text-white truncate">Léa Richard</h3>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">Hier</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Tu as les cours d'histoire ?</p>
+                <span class="inline-flex items-center text-xs font-medium text-gray-500 dark:text-gray-400 mt-1">
+                    <i class="bi bi-check2-all mr-1"></i>Lu
+                </span>
+            </div>
+        </div>
+
+        <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+            <div class="relative flex-shrink-0">
+                <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    CM
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            </div>
+            <div class="ml-3 flex-1 min-w-0">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-semibold text-gray-900 dark:text-white truncate">Clara Moreau</h3>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">Mar 12</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Bonne journée !</p>
+                <span class="inline-flex items-center text-xs font-medium text-blue-600 dark:text-blue-400 mt-1">
+                    <i class="bi bi-check2-all mr-1"></i>Lu
+                </span>
+            </div>
+        </div>
+
+        <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+            <div class="relative flex-shrink-0">
+                <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    NG
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            </div>
+            <div class="ml-3 flex-1 min-w-0">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-semibold text-gray-900 dark:text-white truncate">Nicolas Girard</h3>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">Mar 10</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">OK, à plus tard</p>
+                <span class="inline-flex items-center text-xs font-medium text-gray-500 dark:text-gray-400 mt-1">
+                    <i class="bi bi-check2-all mr-1"></i>Lu
+                </span>
+            </div>
+        </div>
+
+        <div class="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+            <div class="relative flex-shrink-0">
+                <div class="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    EF
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-gray-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            </div>
+            <div class="ml-3 flex-1 min-w-0">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-semibold text-gray-900 dark:text-white truncate">Emma Faure</h3>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">Mar 8</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Merci !</p>
+                <span class="inline-flex items-center text-xs font-medium text-gray-500 dark:text-gray-400 mt-1">
+                    <i class="bi bi-check2-all mr-1"></i>Lu
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+  <div class="stats">
+    <div class="max-w-7xl mx-auto px-4 sm:px-4 lg:px-4 py-8">
+      <div class="mb-8">
+            <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white">Tableau de bord Admin</h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">Bienvenue sur votre espace de gestion</p>
+        </div>
+        <div class="mb-10">
+          <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Toutes les Statistiques</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5 transition hover:shadow-lg">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Total Membres</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-1">493</p>
+                            <p class="text-xs text-blue-600 dark:text-blue-500 mt-2">
+                            Total
+                            </p>
+                        </div>
+                        <div class="p-3 rounded-full">
+                            <i class="bi bi-people text-2xl text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                    </div>
+                </div>
+               <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5 transition hover:shadow-lg">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Total professeurs</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-1">234</p>
+                            <p class="text-xs text-blue-600 dark:text-blue-500 mt-2" onclick="professeurs()">
+                                Voir <i class="bi bi-arrow-right mx-1"></i>
+                            </p>
+                        </div>
+                        <div class=" p-3 rounded-full">
+                            <i class="bi bi-person-circle text-2xl text-yellow-500 dark:text-yellow-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5 transition hover:shadow-lg">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Total Eleves</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-1">492</p>
+                            <p class="text-xs text-blue-600 dark:text-blue-500 mt-2" onclick="eleves()">
+                                Voir <i class="bi bi-arrow-right mx-1"></i>
+                            </p>
+                        </div>
+                        <div class=" p-3 rounded-full">
+                            <i class="bi bi-person-lines-fill text-2xl text-green-600 dark:text-green-400"></i>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5 transition hover:shadow-lg">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Total classes</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-1">10</p>
+                            <p class="text-xs text-blue-600 dark:text-blue-500 mt-2" onclick="classe()">
+                                Voir <i class="bi bi-arrow-right mx-1"></i>
+                            </p>
+                        </div>
+                        <div class=" p-3 rounded-full">
+                            <i class="bi bi-building text-2xl text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                    </div>
+                </div>
+               <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5 transition hover:shadow-lg">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Key Access</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-1">25</p>
+                            <p class="text-xs text-blue-600 dark:text-blue-500 mt-2" onclick="keyAccess()">
+                                Voir <i class="bi bi-arrow-right mx-1"></i>
+                            </p>
+                        </div>
+                        <div class=" p-3 rounded-full">
+                            <i class="bi bi-shield-lock text-2xl text-yellow-500 dark:text-yellow-50"></i>
+                        </div>
+                    </div>
+                </div>
+                
+          </div>
+        </div>
+        <div class="mb-10">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Graphiques d'Informations</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <canvas id="pieTotal" class="rounded-lg border border-gray-200 dark:border-gray-700 p-4"></canvas>
+              <canvas id="barTotal" class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 "></canvas>
+            </div>
+    </div>
+    <div class="bg-white dark:bg-gray-800 rounded-lg  border border-gray-200 dark:border-gray-700 p-5 mb-8">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-3">
+              Activité Récente
+              <i class="bi bi-pencil-square mx-2"></i>
+            </h3>
+            <div class="flex items-center justify-center py-8 text-gray-400 dark:text-gray-500">
+                <i class="bi bi-arrow-repeat text-3xl animate-spin mr-2"></i>
+                <span>Chargement...</span>
+            </div>
+            <div class="space-y-4 mt-2">
+    <div class="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-300">
+        <i class="bi bi-check-circle-fill text-green-500 text-base"></i>
+        <span class="flex-1">Nouveau prospect ajouté par Alice</span>
+        <span class="text-xs text-gray-400">il y a 5 min</span>
+    </div>
+    <div class="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-300">
+        <i class="bi bi-check-circle-fill text-blue-500 text-green-500 text-base"></i>
+        <span class="flex-1">Appel terminé avec client #234</span>
+        <span class="text-xs text-gray-400">il y a 1h</span>
+    </div>
+</div>
+        </div>
+  </div>
+</div>
+</div>
+
+<div id="drawer-create-product-default" class="fixed top-0 left-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-900" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+    <h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">Nouvelle classe</h5>
+    <button type="button" data-drawer-dismiss="drawer-create-product-default" aria-controls="drawer-create-product-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        <span class="sr-only">Close menu</span>
+    </button>
+    <form action="#">
+        <div class="space-y-4">
+            <div>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+                <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="le nom de la classe ..." required="">
+            </div>
+            
+            <div>
+                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Professeur</label>
+                <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option selected="">Select teacher</option>
+                    <option value="TV">bahhanaha</option>
+                    <option value="PC">Shhhhh</option>
+                    <option value="GA">Sim</option>
+                    <option value="PH">Dam</option>
+                </select>
+            </div>
+            <div>
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Description de la classe"></textarea>
+            </div>
+            <div class="bottom-0 left-0 flex justify-center w-full pb-4 space-x-4 md:px-4 md:absolute">
+                <button type="submit" class="text-white w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-blue-800">
+                    Add classe
+                </button>
+                <button type="button" data-drawer-dismiss="drawer-create-product-default" aria-controls="drawer-create-product-default" class="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    <svg aria-hidden="true" class="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="style/flowbite.min.js"></script>
+<script src="js/directeur.js"></script>
+</body>
+</html>
+</html>

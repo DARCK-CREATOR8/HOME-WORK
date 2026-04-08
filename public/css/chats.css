@@ -1,0 +1,32 @@
+   .chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+    .chat-messages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    .chat-messages::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+    .dark .chat-messages::-webkit-scrollbar-track {
+        background: #1f2937;
+    }
+    .dark .chat-messages::-webkit-scrollbar-thumb {
+        background: #4b5563;
+    }
+    .chat-messages{
+      height: 540px
+    }
+    .body.dark {
+      background: #111827;
+    }
+    .body{
+      height: 630px;
+    }
+    .icb{
+      font-size: 10px;
+      height: 45px;
+      width: 45px;
+    }
+   

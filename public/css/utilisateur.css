@@ -1,0 +1,26 @@
+
+
+.body.dark{
+  background: #111827;
+}
+.feature-card{
+  border-radius: 20px 20px;
+  transition: all 0.4s ease;
+}
+.feature-card:active{
+  transform: scale(0.7);
+}
+.ic div {
+  transition: background 0.5s ease;
+}
+.big-container .div{
+  transition: display 0.8s ease;
+}
+.big-container {
+  max-height: 630px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.header{
+  box-shadow: 4px 6px 10px rgba(0,0,0,0.6);
+}

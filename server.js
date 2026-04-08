@@ -1,84 +1,47 @@
 const express = require("express")
 const session = require("express-session")
-const { MongoStore } = require("connect-mongo")
-const cors = require("cors")
-const mongoose = require("mongoose"); 
-const { Parser } = require("json2csv")
-const webpush = require("web-push")
-const bcrypt = require("bcryptjs");
-const PDFDocument = require("pdfkit");
-const urlDb = process.env.MONGO_URI;
 const app = express()
+const webpush = require("web-push")
+const User = require("./models/User.js")
+const Work = require("./models/Work.js")
+const Notification = require("./models/Notification.js")
+const Subscription = require("./models/Subscription.js")
+const mongoose = require("mongoose");
+const urlDb = "mongodb+srv://DARCK-CREATOR:dbDarckCreator@home-work.umdhohl.mongodb.net/schoolDB"
+mongoose.connect("mongodb+srv://DARCK-CREATOR:dbDarckCreator@home-work.umdhohl.mongodb.net/schoolDB")
+.then(() => console.log("MongoDB connecté ✅"))
+webpush.setVapidDetails(
+    "mailto:danielluzumu12@gmail.com",
+    "BIo_hsQ3pb93rTa8kjU1DjCjJZ1tMlGZ3YflnxJJLps0PrTpqwa5yqISByjZ-RiY7Tm14oiMDQDwuk7uQjhMR2s",
+    "eExjt7ZaphPRWzO4NqjIsgCmPC1lY97ipmKx_pOOIZ4"
+)
+const PORT = 3000
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: "monsecret",
   resave: false,
   saveUninitialized: true,
-   store: MongoStore.create({ 
-    mongoUrl: urlDb,
-    ttl: 24 * 60 * 60, 
-    autoRemove: 'interval',
-    autoRemoveInterval: 10
-  }),
   cookie: {
     secure: false,
     sameSite: "lax",
     httpOnly: true,
-    maxAge: 7 * 24 * 60 * 60 * 1000
   }
 }));
-const PORT = process.env.PORT
-const SALT_ROUNDS = 10;
-webpush.setVapidDetails(
-    "mailto:danielluzumu12@gmail.com",
-    process.env.VAPID_PUBLIC_KEY,
-    process.env.VAPID_PRIVATE_KEY
-)
-
-app.use(cors({
-  origin: process.env.BASE_API_URL,
-  credentials: true
-}));
-mongoose.connect(urlDb)
-.then(() => {
-  console.log("MongoDB connecté ✅");
-})
-.catch(err => console.log("Erreur connexion à MongoDb:", err));
-
-const User = require("./models/User.js");
-const Work = require("./models/Work.js");
-const Subscription = require("./models/Subscription.js"); // Dépend de rien
-const Notification = require("./models/Notification.js"); 
 app.use(express.json())
 app.use(express.static("public"))
- 
+.catch(err => console.log("Erreur connexion  a MongoDb:", err));
 app.post('/register', async (req, res) => {
   try{
     const {name,email,password,number,role} = req.body;
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
     const newUser = new User({
       name,
       email,
-      password: hashedPassword,
+      password,
       number,
       role
     });
     await newUser.save()
-    if(role === "eleve") {
-      const works = await Work.find(); // récupérer tous les devoirs
-      for(const work of works){
-        await Notification.create({
-          user: newUser._id,
-          work: work._id,
-          type: work.type,
-          title: work.title
-        });
-      }
-    }
-    req.session.userId = newUser._id;
-    req.session.role = newUser.role;
-
     res.status(201).json({
-      message : "Utlisateurs creer et connecter",
+      message : "Utlisateurs creer",
       role: newUser.role
     })
   }
@@ -91,17 +54,10 @@ app.post('/register', async (req, res) => {
 app.post("/login", async (req, res) => {
   try{
     const {email,password} = req.body
-    const user = await User.findOne({email})
+    const user = await User.findOne({email,password})
     if(!user){
       return res.status(401).json({message: "Erreur mot de passe ou email incorrect"});
     }
-    const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(400).json({ message: "Mot de passe incorrect" });
-      }
-      console.log("Mot de passe envoyé :", password);
-console.log("Mot de passe stocké :", user.password);
-console.log("Match :", isMatch);
     req.session.userId = user._id
     req.session.role = user.role
     res.status(200).json({
@@ -154,12 +110,13 @@ app.post("/works", async (req,res) => {
   })
   const teacher = await User.findById(req.session.userId).select("name")
   for(const student of students){
-    Notification.create({
+  await  Notification.create({
       user: student._id,
       work: newWork._id,
       type: newWork.type,
       title: newWork.title
     })
+    
   }
   const subscriptions = await Subscription.find()
   const pushResult = {sent: 0, failid: 0, expired: 0}
@@ -245,32 +202,22 @@ app.get("/me", async (req,res) => {
     res.status(500).json({message:"Erreur serveur"})
   }
 })
-app.get("/notifications", async (req, res) => {
-  try {
-
-    if (!req.session.userId) {
-      return res.status(401).json({ message: "Non authentifié" });
-    }
-
-    const notifications = await Notification.find({ user: req.session.userId })
-      .sort({ createdAt: -1 })
-      .limit(20); 
-    
-    res.json(notifications);
-    
-  } catch (error) {
-    console.error('Erreur notifications:', error);
-    res.status(500).json({ message: "Erreur serveur !" });
+app.get("/notifications", async (req,res) =>{
+  if (!req.session.userId) {
+  return res.status(401).json({ message: "Non autorisé" });
+}
+  try{
+    const notifications = await Notification.find({user: req.session.userId}).populate("work").sort({createdAt: -1})
+    res.json(notifications)
+    console.log(notifications)
   }
-});
+  catch (error)  {
+    res.status(500).json({message: "Erreur serveur !"})
+  }
+})
 app.post("/subscribe", async (req, res) => {
     try {
         const subscription = req.body
-        const exist = await Subscription.findOne({endpoint: subscription.endpoint})
-        if (exist) {
-          console.log("Deja abonner")
-          return res.status(200).json({message: "Utlisateurs existe deja !"})
-        }
         const newSub = new Subscription(subscription)
         await newSub.save()
         console.log("✅ Abonnement sauvegardé en BD")
@@ -415,68 +362,8 @@ app.get("/push-client", (req, res) => {
         </html>
     `);
 });
-app.get("/export-work/:id", async (req, res) => {
-  try {
-    if (!req.session.userId) {
-      return res.status(401).json({ message: "Non autorisé" });
-    }
 
-    const workId = req.params.id;
 
-    const notification = await Notification.findOne({
-      user: req.session.userId,
-      work: workId
-    }).populate({
-      path: "work",
-      populate: {
-        path: "teacher"
-      }
-    });
-
-    if (!notification || !notification.work) {
-      return res.status(404).json({ message: "Travail introuvable !" });
-    }
-
-    const work = notification.work;
-    
-       const deadlineDate = new Date(work.deadline);
-      let today = new Date()
-    const dls = Math.ceil((deadlineDate - today) / (1000 * 60 * 60 * 24));
-      const formattedDate = deadlineDate.toLocaleDateString();
-      
-    const doc = new PDFDocument();
-
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename="${work.title.replace(/\s+/g, "_")}.pdf"`
-    );
-
-    doc.pipe(res);
-
-    doc.fontSize(20).text("HOME WORK", { align: "center" });
-    doc.moveDown();
-    doc.fontSize(12).text(`Professeur : ${notification.work.teacher?.name || "Inconnue"}`, {
-      align: "left" })
-    doc.moveDown()
-    doc.fontSize(16).text(`Titre : ${work.title} / ${notification.type}`);
-    doc.moveDown();
-    
-    doc.text("Description :", { underline: true });
-    doc.moveDown();
-    doc.fontSize(12).text(work.description || "Aucune description");
-    doc.moveDown();
-    doc.fontSize(10).text(`A rendre le : ${formattedDate || "Non définie"}`,{align: "right"});
-    doc.end();
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
-  }
-});
-app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
-});
 
 
 app.listen(PORT,() => {

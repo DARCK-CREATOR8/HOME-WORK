@@ -10,7 +10,7 @@ const subscriptionSchema = new mongoose.Schema({
         auth: String,
         p256dh: String
     },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true},
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     createdAt: { type: Date, default: Date.now }
 })
 
